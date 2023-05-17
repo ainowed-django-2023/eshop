@@ -1,0 +1,81 @@
+{% extends '_layout/base.html' %}
+
+{% block content %}
+{% load static %}
+		<div class="section page-content">
+			<div class="container">
+				<div class="row">
+<!--					////////////////////////////////////////-->
+					<div class="content-box" style="display: flex; flex-direction: column; gap: 10px; text-align: center">
+					</div>
+<!--					////////////////////////////////////////-->
+						<table id="orders-table" border="1" class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Orders</th>
+									<th>Product</th>
+									<th>Price</th>
+									<th>Date</th>
+									<th>Amount</th>
+									<th>Choose</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for order in user_orders %}
+								<tr class="">
+									<th class="id-cell">{{ order.id }}</th>
+									<th>{{ order.code }}</th>
+									<th>{{ order.products.name }}</th>
+									<th	class="price-cell">{{ order.products.price }}</th>
+									<th>{{ order.datetime }}</th>
+									<th class="count-cell">
+										<input type="number" class="count" min="1" value="{{ order.count }}">
+									</th>
+									<th>
+										<input type="checkbox" class="check" value="yes" checked>
+									</th>
+									<th>
+										<input type="hidden" value="{{ order.id }}">
+										<button class="btn btn-sm btn-danger del-btn">Delete</button>
+									</th>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					<hr>
+					<div>
+						<h5>
+							Total cost: &nbsp;
+							<span id="total" style="color: red">0.00 uah</span>
+						</h5>
+					</div>
+					<p>
+						<a id="bill-btn" href="/orders/bill/1,2,3" class="btn btn-success">
+							Move to the order
+						</a>
+					</p>
+				</div>
+			</div>
+			<style>
+				p {
+					margin-top: 20px;
+				}
+				#orders-table td{
+					vertical-align: middle;
+				}
+				.count{
+					width: 50px;
+					text-align: center;
+					padding-left: 5px;
+				}
+				input[type="number"]:not([step="any"])::-webkit-inner-spin-button,
+				input[type="number"]:not([step="any"])::-webkit-outer-spin-button {
+  					opacity: 1;
+				}
+			</style>
+			<script src="{% static 'js/order_calc.js' %}"></script>
+		</div>
+{% endblock content %}
+

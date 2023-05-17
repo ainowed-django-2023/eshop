@@ -35,3 +35,17 @@ def ajax_card(request):
     response['total'] = total
 
     return JsonResponse(response)
+
+def ajax_cart_display(request):
+    response = dict()
+    uid = request.GET.get('uid')
+    user_orders = Order.objects.filter(user_id=uid)
+
+    total = 0
+    for order in user_orders:
+        total += order.products.price * order.count
+
+    response['count'] = len(user_orders)
+    response['total'] = total
+
+    return JsonResponse(response)
