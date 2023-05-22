@@ -1,0 +1,45 @@
+{% extends '_layout/base.html' %}
+
+{% block content %}
+
+		<div class="section page-content">
+			<div class="container">
+				<div class="row">
+<!--					////////////////////////////////////////-->
+					<div class="content-box" style="display: flex; flex-direction: column; gap: 10px; text-align: center">
+						<form id="form2" action="/orders/confirm/{{ init_list }}" method="post">
+							{% csrf_token %}
+							<label for="email">
+								Введіть віш E-mail для зв'язку із службою доставки:
+							</label>
+							<input type="text" id="email" name="email" class="inp" required>
+							<span id="email-err" class="error"></span>
+						<p>
+							<input type="submit" id="submit" value="Підтвердити" class="btn btn-success my-btn">
+							<input type="submit" id="reset" value="Відмінити" class="btn btn-primary my-btn">
+						</p>
+						</form>
+					</div>
+<!--					////////////////////////////////////////-->
+				</div>
+			</div>
+			<style>
+				label{
+					font: italic 13pt 'Trebuchet MS';
+				}
+				.inp {
+					width: 40%;
+					padding: 5px;
+					text-align: center;
+					font; 13pt 'Trebuchet MS';
+					color: red;
+				}
+				.my-btn{
+					width: 150px;
+					margin-top: 15px;
+					margin-right: 5px;
+				}
+			</style>
+		</div>
+{% endblock content %}
+
