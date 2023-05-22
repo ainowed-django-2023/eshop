@@ -17,6 +17,13 @@ const doCalculate = () => {
     console.log(`totalPrice: ${totalPrice}`)
     console.log(`selOrderIds: ${selOrderIds}`)
     $('#total').text(`${totalPrice.toFixed(2)} uah`)
+    $('#bill-btn').attr('href', `/orders/bill/${selOrderIds}`)
+
+    if (totalPrice == 0) {
+        $('#bill-btn').fadeOut(1000);
+    } else {
+        $('#bill-btn').fadeIn(1000);
+    }
 }
 
 $(document).ready(() => {
@@ -25,6 +32,7 @@ $(document).ready(() => {
     doCalculate()
 
     $('.check').click((event) => {
-
+        console.log('input.check -> click')
+        doCalculate()
     })
 })
